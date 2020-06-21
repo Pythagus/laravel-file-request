@@ -1,0 +1,21 @@
+{
+    "name": "pythagus/laravel-file-request",
+    "description": "Request helper to easily save files in your application",
+    "keywords": ["file", "request", "Laravel"],
+    "homepage": "https://github.com/Pythagus/laravel-file-request",
+    "type": "package",
+    "license": "MIT",
+    "authors": [{
+        "name": "Damien Molina",
+        "email": "damis01800@gmail.com"
+    }],
+    "require": {
+        "php": ">=5.6.4",
+        "laravel/framework": ">=5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pythagus\\LaravelFileRequest\\": "src/"
+        }
+    }
+}
