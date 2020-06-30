@@ -1,4 +1,4 @@
-# Pythagus - Laravel File Request
+# Laravel File Request
 LaravelFileRequest is a light Laravel package to easily manage files.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -73,8 +73,6 @@ class Course extends Model {
     }
 }
 ```
-
-*Note :* see the section **StorageHelper features** to have an idea of the available methods.
 
 ## Configuration
 In this section, we will see how to configure the request to manage the file. 

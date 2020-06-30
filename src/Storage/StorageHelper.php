@@ -36,12 +36,37 @@ class StorageHelper {
     private static $disk = 'public' ;
 
     /**
+     * Asset of the default file.
+     *
+     * @var null
+     */
+    private static $defaultAsset = null ;
+
+    /**
      * Set the disk of the StorageHelper.
      *
      * @param string $disk
      */
     public static function setDisk(string $disk) {
-        static::$disk = $disk ;
+        self::$disk = $disk ;
+    }
+
+    /**
+     * Set the default asset.
+     *
+     * @param string $asset
+     */
+    public static function setDefaultAsset(string $asset) {
+        self::$defaultAsset = $asset ;
+    }
+
+    /**
+     * Determine whether a default asset was defined.
+     *
+     * @return bool
+     */
+    private function hasDefaultAsset() {
+        return ! empty(self::$defaultAsset) ;
     }
 
     /**
@@ -87,6 +112,27 @@ class StorageHelper {
         $this->assertNotNullFile(__METHOD__) ;
 
         return asset('storage/'.$this->formatPath()) ;
+    }
+
+    /**
+     * @param string|null $default
+     * @return string
+     * @throws NullStorageAttributeException
+     */
+    public function nullableAsset(string $default = null) {
+        if($this->hasFile()) {
+            return $this->asset() ;
+        }
+
+        if(! is_null($default)) {
+            return $default ;
+        }
+
+        if(! is_null(self::$defaultAsset)) {
+            return self::$defaultAsset ;
+        }
+
+        return "" ;
     }
 
     /**
@@ -151,7 +197,7 @@ class StorageHelper {
      * @throws NullStorageAttributeException
      */
     private function assertNotNullFile(string $method = null) {
-        if(is_null($this->file)) {
+        if(! $this->hasFile()) {
             throw new NullStorageAttributeException('file', $method) ;
         }
     }
@@ -167,6 +213,13 @@ class StorageHelper {
         if(is_null($this->folder)) {
             throw new NullStorageAttributeException('folder', $method) ;
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasFile() {
+        return ! empty($this->file) ;
     }
 
     /**
